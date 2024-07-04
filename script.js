@@ -37,7 +37,15 @@ const reverseString = (str) => {
   return reversedString;
 };
 
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+console.log(fibonacci(5)); // Output: 5
+
+
 // Example usage
-const inputString = "Hello, world!";
-console.log("Original string:", inputString);
-console.log("Reversed string:", reverseString(inputString));
+// const inputString = "Hello, world!";
+// console.log("Original string:", inputString);
+// console.log("Reversed string:", reverseString(inputString));
