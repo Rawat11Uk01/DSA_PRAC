@@ -44,6 +44,17 @@ function fibonacci(n) {
 
 console.log(fibonacci(5)); // Output: 5
 
+function findMiddleNode(head) {
+  let slow = head;
+  let fast = head;
+
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  return slow;
+}
 
 // Example usage
 // const inputString = "Hello, world!";
