@@ -84,7 +84,7 @@ const binarySearch = (arr, target, left = 0, right = arr.length - 1) => {
   if (left > right) return -1; // Base case: target not found
 
   const mid = Math.floor((left + right) / 2);
-  
+
   if (arr[mid] === target) {
     return mid; // Target found, return the index
   }
@@ -100,8 +100,39 @@ const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 console.log(binarySearch(arr, 5)); // Output: 4
 console.log(binarySearch(arr, 10)); // Output: -1
 
-
 // Example usage
 // const inputString = "Hello, world!";
 // console.log("Original string:", inputString);
 // console.log("Reversed string:", reverseString(inputString));
+
+// Binary Search Function with Error Handling
+const binarySearch2 = (arr, target, left = 0, right = arr.length - 1) => {
+  if (!Array.isArray(arr) || arr.length === 0) {
+    throw new Error("Input array must be a non-empty array.");
+  }
+  if (arr.some((_, i, a) => i > 0 && a[i] < a[i - 1])) {
+    throw new Error("Input array must be sorted.");
+  }
+
+  if (left > right) return -1; // Base case: target not found
+
+  const mid = Math.floor((left + right) / 2);
+
+  if (arr[mid] === target) {
+    return mid; // Target found, return the index
+  }
+  if (arr[mid] < target) {
+    return binarySearch2(arr, target, mid + 1, right); // Search in the right half
+  } else {
+    return binarySearch2(arr, target, left, mid - 1); // Search in the left half
+  }
+};
+
+// Usage
+try {
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  console.log(binarySearch2(arr, 5)); // Output: 4
+  console.log(binarySearch2(arr, 10)); // Output: -1
+} catch (e) {
+  console.error(e.message);
+}
