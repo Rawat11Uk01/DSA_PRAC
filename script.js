@@ -1,5 +1,5 @@
-let arr = [1, 2, 3, 4];
-console.log(arr.map((item) => item * 2));
+// let arr = [1, 2, 3, 4];
+// console.log(arr.map((item) => item * 2));
 
 // Stack implementation using functional programming
 const createStack = () => ({
@@ -55,6 +55,51 @@ function findMiddleNode(head) {
 
   return slow;
 }
+
+// Create a new linked list node
+const createNode = (value, next = null) => ({ value, next });
+
+// Create a linked list from an array
+const createLinkedList = (arr) => {
+  return arr.reduceRight((acc, value) => createNode(value, acc), null);
+};
+
+// Print the linked list
+const printLinkedList = (node) => {
+  let current = node;
+  let result = "";
+  while (current) {
+    result += `${current.value} -> `;
+    current = current.next;
+  }
+  console.log(result + "null");
+};
+
+// Usage
+const list = createLinkedList([1, 2, 3]);
+printLinkedList(list); // Output: 1 -> 2 -> 3 -> null
+
+// Binary Search Function (Recursive)
+const binarySearch = (arr, target, left = 0, right = arr.length - 1) => {
+  if (left > right) return -1; // Base case: target not found
+
+  const mid = Math.floor((left + right) / 2);
+  
+  if (arr[mid] === target) {
+    return mid; // Target found, return the index
+  }
+  if (arr[mid] < target) {
+    return binarySearch(arr, target, mid + 1, right); // Search in the right half
+  } else {
+    return binarySearch(arr, target, left, mid - 1); // Search in the left half
+  }
+};
+
+// Usage
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+console.log(binarySearch(arr, 5)); // Output: 4
+console.log(binarySearch(arr, 10)); // Output: -1
+
 
 // Example usage
 // const inputString = "Hello, world!";
