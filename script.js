@@ -137,7 +137,6 @@
 //   console.error(e.message);
 // }
 
-
 // Create a new linked list node
 const createNode = (value, next = null) => ({ value, next });
 
@@ -154,9 +153,24 @@ const printLinkedList = (node) => {
     result.push(current.value);
     current = current.next;
   }
-  console.log(result.join(' -> ') + ' -> null');
+  console.log(result.join(" -> ") + " -> null");
 };
 
 // Usage
 const list = createLinkedList([1, 2, 3]);
 printLinkedList(list); // Output: 1 -> 2 -> 3 -> null
+
+let num1 = 0;
+let num2 = 1;
+let count = 10;
+
+let fib = [num1, num2];
+
+while (count > 0) {
+  let num3 = num1 + num2;
+  num1 = num2;
+  num2 = num3;
+  fib.push(num3);
+  count--;
+}
+console.log({ fib });
