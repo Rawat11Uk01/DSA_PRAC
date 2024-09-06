@@ -30,14 +30,31 @@ while (fibArray.length <= fibCount) {
   num2 = num3;
   fibArray.push(num3);
 }
-console.log({ fibArray });
+// console.log({ fibArray });
 
 let string = "rawat";
 let reverseStr = "";
 let strCount = 1;
 while (strCount <= string.length) {
   reverseStr += string[string.length - strCount];
-  strCount++
+  strCount++;
 }
 
-console.log({ reverseStr });
+// console.log({ reverseStr });
+let n = 5;
+
+for (let col = 1; col <= n; col++) {
+  let star = "";
+  for (let row = 1; row <= n; row++) {
+    star += "*";
+  }
+  // console.log(star);
+}
+
+for (let col = 1; col <= n; col++) {
+  let star = "";
+  for (let row = 1; row <= col; row++) {
+    star += "*";
+  }
+  console.log(star);
+}
