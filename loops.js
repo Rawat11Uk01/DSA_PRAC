@@ -51,10 +51,49 @@ for (let col = 1; col <= n; col++) {
   // console.log(star);
 }
 
+// *
+// **
+// ***
+// ****
+// *****
+
 for (let col = 1; col <= n; col++) {
   let star = "";
-  for (let row = 1; row <= col; row++) {
+  for (let space = 1; space <= n - col; space++) {
+    star += "-";
+  }
+  for (let s = 1; s <= col; s++) {
     star += "*";
   }
-  console.log(star);
+
+  // console.log(star);
+}
+
+for (let col = 1; col <= n; col++) {
+  let str = "";
+  for (let space = 1; space <= n - col; space++) {
+    str += " ";
+  }
+  for (let star = 1; star <= 2 * col - 1; star++) {
+    str += "*";
+  }
+  // console.log(str);
+}
+
+// for (let col = 1; col <= 2 * n - 1; col++) {
+//   let star = "";
+//   for (let s1 = 1; s1 <= n; s1++) {
+//     star += " ";
+//   }
+//   for (let star = 1; star <= ; star++) {
+//     str += "*";
+//   }
+// }
+
+for (let col = 1; col <= 3(n - 1); col++) {
+  let star = "";
+  for(let s1; s1 <= n - col; s1++){
+    star =" "
+  }
+  
 }
