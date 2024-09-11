@@ -90,10 +90,48 @@ for (let col = 1; col <= n; col++) {
 //   }
 // }
 
-for (let col = 1; col <= 3(n - 1); col++) {
-  let star = "";
-  for(let s1; s1 <= n - col; s1++){
-    star =" "
+// for (let col = 1; col <= 3(n - 1); col++) {
+//   let star = "";
+//   for(let s1; s1 <= n - col; s1++){
+//     star =" "
+//   }
+// }
+
+function printDiamond(n) {
+  // Upper part of the diamond
+  for (let i = 1; i <= n; i++) {
+    let str = "";
+
+    // Printing leading spaces
+    for (let j = i; j < n; j++) {
+      str += " ";
+    }
+
+    // Printing stars
+    for (let k = 1; k <= 2 * i - 1; k++) {
+      str += "*";
+    }
+
+    console.log(str);
   }
-  
+
+  // Lower part of the diamond
+  for (let i = n - 1; i >= 1; i--) {
+    let str = "";
+
+    // Printing leading spaces
+    for (let j = n; j > i; j--) {
+      str += " ";
+    }
+
+    // Printing stars
+    for (let k = 1; k <= 2 * i - 1; k++) {
+      str += "*";
+    }
+
+    console.log(str);
+  }
 }
+
+// Example usage:
+printDiamond(5);
