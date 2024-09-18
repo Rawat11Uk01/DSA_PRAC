@@ -80,78 +80,16 @@ for (let col = 1; col <= n; col++) {
   // console.log(str);
 }
 
-// for (let col = 1; col <= 2 * n - 1; col++) {
+// for (let i = 1; i <= n; i++) {
 //   let star = "";
-//   for (let s1 = 1; s1 <= n; s1++) {
+//   for (let j = 1; j <= n - i; j++) {
 //     star += " ";
 //   }
-//   for (let star = 1; star <= ; star++) {
-//     str += "*";
+//   for (let j = 1; j <= n - i; j++) {
+//     star += " ";
 //   }
-// }
-
-// for (let col = 1; col <= 3(n - 1); col++) {
-//   let star = "";
-//   for(let s1; s1 <= n - col; s1++){
-//     star =" "
+//   for(let k=1; k<= 2*i-1;k++){
+//     star += "*";
 //   }
+//   console.log(star)
 // }
-
-function printDiamond(n) {
-  // Upper part of the diamond
-  for (let i = 1; i <= n; i++) {
-    let str = "";
-
-    // Printing leading spaces
-    for (let j = i; j < n; j++) {
-      str += " ";
-    }
-
-    // Printing stars
-    for (let k = 1; k <= 2 * i - 1; k++) {
-      str += "*";
-    }
-
-    console.log(str);
-  }
-
-  // Lower part of the diamond
-  for (let i = n - 1; i >= 1; i--) {
-    let str = "";
-
-    // Printing leading spaces
-    for (let j = n; j > i; j--) {
-      str += " ";
-    }
-
-    // Printing stars
-    for (let k = 1; k <= 2 * i - 1; k++) {
-      str += "*";
-    }
-
-    console.log(str);
-  }
-}
-
-// Example usage:
-printDiamond(5);
-
-function firstNonRepeatingCharacter(str) {
-  let charCount = {};
-
-  // Count occurrences of each character
-  for (let char of str) {
-    charCount[char] = (charCount[char] || 0) + 1;
-  }
-
-  // Find the first character with a count of 1
-  for (let char of str) {
-    if (charCount[char] === 1) {
-      return char;
-    }
-  }
-
-  return null;  // If no unique character found
-}
-
-console.log(firstNonRepeatingCharacter("abracadabra")); // Output: "c"
