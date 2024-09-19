@@ -1,10 +1,10 @@
 // loops practice problems
 
-let count = 1;
-while (count <= 5) {
-  console.log(count);
-  count++;
-}
+// let count = 1;
+// while (count <= 5) {
+//   console.log(count);
+//   count++;
+// }
 
 // fib series
 // let fibCount = 0;
@@ -93,3 +93,5 @@ for (let col = 1; col <= n; col++) {
 //   }
 //   console.log(star)
 // }
+
+// Problem solving of palindrome by indexing
