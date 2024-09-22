@@ -119,4 +119,28 @@ while (i < n2 - 2) {
   b = c;
   i++;
 }
-console.log(arr);
+// console.log(arr);
+
+// fib series using for loop
+
+function fib(n) {
+  if (n == 0 || n == 1) {
+    return 0;
+  }
+
+  if (n == 2) {
+    return 1;
+  }
+  let a = 0;
+  let b = 1;
+  let arr = [a, b];
+  for (let i = 0; i < n-2; i++) {
+    let c = a + b;
+    arr.push(c);
+     b = c;
+   a = b;
+  }
+  return arr;
+}
+
+console.log(fib(10));
