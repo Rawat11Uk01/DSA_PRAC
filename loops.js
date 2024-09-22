@@ -95,3 +95,13 @@ for (let col = 1; col <= n; col++) {
 // }
 
 // Problem solving of palindrome by indexing
+
+let x = 1234;
+let sum = 0;
+while (x > 0) {
+  let lastReminder = x % 10;
+  sum += lastReminder;
+  x = Math.floor(x /10);
+  console.log(sum);
+}
+
