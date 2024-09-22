@@ -101,7 +101,22 @@ let sum = 0;
 while (x > 0) {
   let lastReminder = x % 10;
   sum += lastReminder;
-  x = Math.floor(x /10);
-  console.log(sum);
+  x = Math.floor(x / 10);
+  // console.log(sum);
 }
 
+// fib series
+
+let a = 0;
+let b = 1;
+let n2 = 10;
+let i = 0;
+let arr = [a, b];
+while (i < n2 - 2) {
+  let c = a + b;
+  arr.push(c);
+  a = b;
+  b = c;
+  i++;
+}
+console.log(arr);
