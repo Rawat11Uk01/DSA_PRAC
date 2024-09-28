@@ -134,7 +134,7 @@ function fib(n) {
   let a = 0;
   let b = 1;
   let arr = [a, b];
-  for (let i = 0; i < n-2; i++) {
+  for (let i = 2; i < n; i++) {
     let c = a + b;
     arr.push(c);
      b = c;
