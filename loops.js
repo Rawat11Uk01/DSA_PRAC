@@ -137,10 +137,43 @@ function fib(n) {
   for (let i = 2; i < n; i++) {
     let c = a + b;
     arr.push(c);
-     b = c;
-   a = b;
+    b = c;
+    a = b;
   }
   return arr;
 }
 
 console.log(fib(10));
+
+function trap(height) {
+  let n = height.length;
+  if (n === 0) return 0;
+
+  // Arrays to store the maximum height to the left and right of each index
+  let leftMax = new Array(n).fill(0);
+  let rightMax = new Array(n).fill(0);
+
+  // Calculate leftMax for each index
+  leftMax[0] = height[0];
+  for (let i = 1; i < n; i++) {
+    leftMax[i] = Math.max(leftMax[i - 1], height[i]);
+  }
+
+  // Calculate rightMax for each index
+  rightMax[n - 1] = height[n - 1];
+  for (let i = n - 2; i >= 0; i--) {
+    rightMax[i] = Math.max(rightMax[i + 1], height[i]);
+  }
+
+  // Calculate total trapped water
+  let totalWater = 0;
+  for (let i = 0; i < n; i++) {
+    totalWater += Math.min(leftMax[i], rightMax[i]) - height[i];
+  }
+
+  return totalWater;
+}
+
+// Example usage
+console.log(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])); // Output: 6
+console.log(trap([4, 2, 0, 3, 2, 5])); // Output: 9
