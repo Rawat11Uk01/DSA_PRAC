@@ -174,3 +174,74 @@ while (count > 0) {
   count--;
 }
 console.log({ fib });
+
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = this.right = null;
+  }
+}
+
+class Codec {
+  // Encodes a tree to a single string.
+  serialize(root) {
+    const result = [];
+
+    function traverse(node) {
+      if (!node) {
+        result.push("null");
+        return;
+      }
+      result.push(node.val);
+      traverse(node.left);
+      traverse(node.right);
+    }
+
+    traverse(root);
+    return result.join(",");
+  }
+
+  // Decodes your encoded data to tree.
+  deserialize(data) {
+    const values = data.split(",");
+    let index = 0;
+
+    function buildTree() {
+      if (values[index] === "null") {
+        index++;
+        return null;
+      }
+
+      const node = new TreeNode(parseInt(values[index]));
+      index++;
+      node.left = buildTree();
+      node.right = buildTree();
+      return node;
+    }
+
+    return buildTree();
+  }
+}
+
+// Test the Codec class
+const codec = new Codec();
+
+// Creating a test binary tree:
+//     1
+//    / \
+//   2   3
+//      / \
+//     4   5
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.right.left = new TreeNode(4);
+root.right.right = new TreeNode(5);
+
+// Serialize the tree
+const serialized = codec.serialize(root);
+console.log("Serialized:", serialized);
+
+// Deserialize the string back to tree
+const deserializedTree = codec.deserialize(serialized);
+console.log("Deserialized Tree Root Value:", deserializedTree.val);
