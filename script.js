@@ -245,3 +245,36 @@ console.log("Serialized:", serialized);
 // Deserialize the string back to tree
 const deserializedTree = codec.deserialize(serialized);
 console.log("Deserialized Tree Root Value:", deserializedTree.val);
+
+class TreeNode {
+  constructor(val = 0, left = null, right = null) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
+}
+
+function lowestCommonAncestor(root, p, q) {
+  if (!root || root === p || root === q) return root;
+
+  const left = lowestCommonAncestor(root.left, p, q);
+  const right = lowestCommonAncestor(root.right, p, q);
+
+  if (left && right) return root;
+  return left ? left : right;
+}
+
+// Test case for LCA
+const tree = new TreeNode(3);
+tree.left = new TreeNode(5);
+tree.right = new TreeNode(1);
+tree.left.left = new TreeNode(6);
+tree.left.right = new TreeNode(2);
+tree.right.left = new TreeNode(0);
+tree.right.right = new TreeNode(8);
+
+const p = tree.left; // Node with value 5
+const q = tree.right; // Node with value 1
+
+const ancestor = lowestCommonAncestor(tree, p, q);
+console.log("Lowest Common Ancestor:", ancestor.val);
