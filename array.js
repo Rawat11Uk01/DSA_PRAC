@@ -28,4 +28,19 @@ function separateZeroAndOne(arr) {
   return arr;
 }
 
-console.log(separateZeroAndOne([1, 0, 0, 1, 0, 1, 1, 0, 0]));
+// console.log(separateZeroAndOne([1, 0, 0, 1, 0, 1, 1, 0, 0]));
+
+const repeatedChar = (string) => {
+  let stringCount = {};
+
+  for (let str of string) {
+    if (stringCount[str]) {
+      stringCount[str]++;
+    } else {
+      stringCount[str] = 1;
+    }
+  }
+  return stringCount;
+};
+
+console.log(repeatedChar("kashish"));
