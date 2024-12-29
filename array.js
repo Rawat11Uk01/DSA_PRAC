@@ -88,4 +88,33 @@ function mergeSortedArray(a, b) {
 
   return c;
 }
-console.log(mergeSortedArray([1, 2, 4, 9, 11], [0, 3, 4, 6]));
+// console.log(mergeSortedArray([1, 2, 4, 9, 11], [0, 3, 4, 6]));
+
+// max consecutive ones in a binary array
+
+function maxConsecutiveOnes(arr) {
+  let finalAns = 0;
+  let currentAns = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] == 1) {
+      currentAns++;
+    } else {
+      if (finalAns < currentAns) {
+        finalAns = currentAns;
+      }
+      currentAns = 0;
+    }
+
+    if (i == arr.length - 1) {
+      if (finalAns < currentAns) {
+        finalAns = currentAns;
+      }
+    }
+  }
+  return finalAns;
+}
+
+console.log(
+  maxConsecutiveOnes([1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1])
+);
