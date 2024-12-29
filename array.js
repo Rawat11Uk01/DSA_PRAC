@@ -115,6 +115,27 @@ function maxConsecutiveOnes(arr) {
   return finalAns;
 }
 
-console.log(
-  maxConsecutiveOnes([1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1])
-);
+// console.log(
+//   maxConsecutiveOnes([1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1])
+// );
+
+// return missing number from an array from 1 to n
+
+function returnMissingNumbers(arr, n) {
+  let res = [];
+  for (let i = 0; i < n; i++) {
+    let currentValue = Math.abs(arr[i]);
+    if (arr[currentValue - 1] > 0) {
+      arr[currentValue - 1] = -arr[currentValue - 1];
+    }
+  }
+
+  for (let i = 0; i < n; i++) {
+    if (arr[i] > 0) {
+      res.push(i + 1);
+    }
+  }
+  return res;
+}
+
+console.log(returnMissingNumbers([8, 2, 3, 2, 5, 6, 6, 8], 8));
