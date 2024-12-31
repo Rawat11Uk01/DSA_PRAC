@@ -138,4 +138,32 @@ function returnMissingNumbers(arr, n) {
   return res;
 }
 
-console.log(returnMissingNumbers([8, 2, 3, 2, 5, 6, 6, 8], 8));
+// console.log(returnMissingNumbers([8, 2, 3, 2, 5, 6, 6, 8], 8));
+
+// two sum
+
+function twoSum(arr, target) {
+  // for (let i = 0; i < arr.length; i++) {
+  //   for (let j = i + 1; j < arr.length; j++) {
+  //     if (arr[i] + arr[j] == 6) {
+  //       return [i, j];
+  //     }
+  //   }
+  // }
+
+  let sortedArr = arr.map((a, i) => [a, i]).sort((a, b) => a[0] - b[0]);
+  let i = 0;
+  let j = sortedArr.length - 1;
+
+  while (i < j) {
+    if (sortedArr[i][0] + sortedArr[j][0] == target) {
+      return [sortedArr[i][1], sortedArr[j][1]];
+    } else if (sortedArr[i][0] + sortedArr[j][0] > target) {
+      j--;
+    } else if (sortedArr[i][0] + sortedArr[j][0] < target) {
+      i++;
+    }
+  }
+}
+
+console.log(twoSum([3, 2, 4], 6));
