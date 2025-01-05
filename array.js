@@ -166,4 +166,16 @@ function twoSum(arr, target) {
   }
 }
 
-console.log(twoSum([3, 2, 4], 6));
+// console.log(twoSum([3, 2, 4], 6));
+
+// 2d array
+// creating a 2d array
+function create2dArray(row, column) {
+  const arr = new Array(row).fill(new Array(column).fill(0));
+  for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
+  }
+  return arr;
+}
+
+console.log(create2dArray(5, 6));

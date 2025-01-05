@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Speech-to-Text and Text-to-Speech</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
+        background-color: #6200ea;
+        color: white;
+        padding: 20px;
+        margin: 0;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      select,
+      input[type="text"],
+      button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        background-color: #6200ea;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #5e35b1;
+      }
+
+      p {
+        margin: 10px 0;
+        font-size: 16px;
+      }
+
+      #textToSpeak {
+        width: calc(100% - 22px); /* Adjust for padding */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Speech-to-Text and Text-to-Speech</h1>
+    <div class="container">
+      <label for="language">Select Language:</label>
+      <select id="language">
+        <option value="en-US">English (United States)</option>
+        <option value="hi-IN">Hindi (India)</option>
+        <option value="ta-IN">Tamil (India)</option>
+        <option value="te-IN">Telugu (India)</option>
+        <option value="kn-IN">Kannada (India)</option>
+        <option value="ml-IN">Malayalam (India)</option>
+        <option value="mr-IN">Marathi (India)</option>
+        <option value="gu-IN">Gujarati (India)</option>
+        <option value="bn-IN">Bengali (India)</option>
+        <option value="pa-IN">Punjabi (India)</option>
+        <option value="or-IN">Odia (India)</option>
+        <option value="as-IN">Assamese (India)</option>
+        <option value="ur-IN">Urdu (India)</option>
+      </select>
+
+      <label for="textToSpeak">Enter Text:</label>
+      <input type="text" id="textToSpeak" value="வணக்கம்" />
+      <button onclick="speakText()">Speak Text</button>
+      <button onclick="startSpeechRecognition()">Start Speech-to-Text</button>
+    </div>
+
+    <script>
+      // Speak the text
+      function speakText() {
+        const text = document.getElementById("textToSpeak").value.trim();
+        if (!text) {
+          alert("Please enter some text to speak.");
+          return;
+        }
+        const lang = document.getElementById("language").value;
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        const voices = window.speechSynthesis.getVoices();
+        const selectedVoice = voices.find((voice) => voice.lang === lang);
+
+        if (selectedVoice) {
+          utterance.voice = selectedVoice;
+          utterance.lang = lang;
+        } else {
+          console.warn(
+            `Regional voice not found for ${lang}, using default voice.`
+          );
+          utterance.lang = lang; // Still attempt pronunciation
+        }
+
+        window.speechSynthesis.speak(utterance);
+      }
+
+      // Start Speech-to-Text
+      function startSpeechRecognition() {
+        const SpeechRecognition =
+          window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+          alert("Speech recognition is not supported in your browser.");
+          return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.lang = document.getElementById("language").value;
+
+        recognition.onstart = () => {
+          console.log("Speech recognition started...");
+        };
+
+        recognition.onresult = (event) => {
+          const spokenText = event.results[0][0].transcript;
+          document.getElementById("textToSpeak").value = spokenText;
+          console.log("Recognized text:", spokenText);
+        };
+
+        recognition.onerror = (event) => {
+          console.error("Speech recognition error:", event.error);
+          alert("An error occurred during speech recognition.");
+        };
+
+        recognition.onend = () => {
+          console.log("Speech recognition ended.");
+        };
+
+        recognition.start();
+      }
+
+      // Log available voices
+      window.speechSynthesis.onvoiceschanged = () => {
+        console.log("Available voices:", window.speechSynthesis.getVoices());
+      };
+    </script>
+  </body>
+</html>
