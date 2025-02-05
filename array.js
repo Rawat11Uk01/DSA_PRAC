@@ -166,14 +166,30 @@ function twoSum(arr, target) {
   }
 }
 
+function twoSumV2(arr, target) {
+  const map = new Map();
+  for (let i = 0; i < arr.length; i++) {
+    const complement = target - arr[i];
+    if (map.has(complement)) {
+      return [map.get(complement), i];
+    }
+    map.set(arr[i], i);
+  }
+}
+
 // console.log(twoSum([3, 2, 4], 6));
 
 // 2d array
 // creating a 2d array
 function create2dArray(row, column) {
-  const arr = new Array(row).fill(new Array(column).fill(0));
+  const arr = new Array(row)
+    .fill(null)
+    .map((_, idx) => new Array(column).fill(idx));
+
   for (let i = 0; i < arr.length; i++) {
-    console.log(arr[i]);
+    for (let j = 0; j < arr[i].length; j++) {
+      console.log(arr[i][j]);
+    }
   }
   return arr;
 }
