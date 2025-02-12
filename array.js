@@ -195,3 +195,33 @@ function create2dArray(row, column) {
 }
 
 console.log(create2dArray(5, 6));
+
+function longestSubarrayWithSumK(nums, k) {
+  let prefixSum = 0;
+  let maxLength = 0;
+  let map = new Map();
+
+  for (let i = 0; i < nums.length; i++) {
+    prefixSum += nums[i];
+
+    // If prefixSum itself is equal to k
+    if (prefixSum === k) {
+      maxLength = i + 1;
+    }
+
+    // If (prefixSum - k) is found in the map, update maxLength
+    if (map.has(prefixSum - k)) {
+      maxLength = Math.max(maxLength, i - map.get(prefixSum - k));
+    }
+
+    // Store prefixSum only if it's not already in the map
+    if (!map.has(prefixSum)) {
+      map.set(prefixSum, i);
+    }
+  }
+
+  return maxLength;
+}
+
+// Test cases
+console.log(longestSubarrayWithSumK([1, 2, 3, 1, 1, 1, 5, 6], 6)); // Output: 4
