@@ -177,51 +177,63 @@ function twoSumV2(arr, target) {
   }
 }
 
-// console.log(twoSum([3, 2, 4], 6));
+// Maximum Product Subarray Problem
+// Given an integer array nums, find a contiguous non-empty subarray within the array
+// that has the largest product, and return the product.
 
-// 2d array
-// creating a 2d array
-function create2dArray(row, column) {
-  const arr = new Array(row)
-    .fill(null)
-    .map((_, idx) => new Array(column).fill(idx));
+function maxProductSubarray(nums) {
+  if (nums.length === 0) return 0;
 
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
-      console.log(arr[i][j]);
-    }
-  }
-  return arr;
-}
+  let maxProduct = nums[0];
+  let minProduct = nums[0];
+  let result = nums[0];
 
-console.log(create2dArray(5, 6));
-
-function longestSubarrayWithSumK(nums, k) {
-  let prefixSum = 0;
-  let maxLength = 0;
-  let map = new Map();
-
-  for (let i = 0; i < nums.length; i++) {
-    prefixSum += nums[i];
-
-    // If prefixSum itself is equal to k
-    if (prefixSum === k) {
-      maxLength = i + 1;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < 0) {
+      [maxProduct, minProduct] = [minProduct, maxProduct];
     }
 
-    // If (prefixSum - k) is found in the map, update maxLength
-    if (map.has(prefixSum - k)) {
-      maxLength = Math.max(maxLength, i - map.get(prefixSum - k));
-    }
+    maxProduct = Math.max(nums[i], maxProduct * nums[i]);
+    minProduct = Math.min(nums[i], minProduct * nums[i]);
 
-    // Store prefixSum only if it's not already in the map
-    if (!map.has(prefixSum)) {
-      map.set(prefixSum, i);
-    }
+    result = Math.max(result, maxProduct);
   }
 
-  return maxLength;
+  return result;
 }
 
-// Test cases
-console.log(longestSubarrayWithSumK([1, 2, 3, 1, 1, 1, 5, 6], 6)); // Output: 4
+function maxProductSubarrayV2(nums) {
+  if (nums.length === 0) return 0;
+
+  let result = nums[0];
+  let imax = nums[0];
+  let imin = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < 0) {
+      let temp = imax;
+      imax = imin;
+      imin = temp;
+    }
+
+    imax = Math.max(nums[i], imax * nums[i]);
+    imin = Math.min(nums[i], imin * nums[i]);
+
+    result = Math.max(result, imax);
+  }
+
+  return result;
+}
+
+// Test cases for Maximum Product Subarray
+console.log("Maximum Product Subarray Tests:");
+console.log(maxProductSubarray([2, 3, -2, 4])); // Output: 6 (subarray [2,3])
+console.log(maxProductSubarray([-2, 0, -1])); // Output: 0
+console.log(maxProductSubarray([-2, 3, -4])); // Output: 24 (subarray [-2,3,-4])
+console.log(maxProductSubarray([1, -3, 2, 1, -1])); // Output: 6 (subarray [2,1,-1] or [-3,2,1])
+console.log(maxProductSubarray([-1, -3, -10, 0, 60])); // Output: 60
+
+console.log("\nUsing V2 approach:");
+console.log(maxProductSubarrayV2([2, 3, -2, 4])); // Output: 6
+console.log(maxProductSubarrayV2([-2, 0, -1])); // Output: 0
+console.log(maxProductSubarrayV2([-2, 3, -4])); // Output: 24
